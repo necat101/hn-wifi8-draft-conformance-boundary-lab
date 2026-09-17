@@ -8,6 +8,11 @@ feature ≠ Wi-Fi Alliance certification ≠ vendor marketing claim
 No radios, no packet capture, no network, no external packages — stdlib only.
 Reads fixtures/cases.json and writes results.json + RESULTS.md
 Exit 0.
+
+Intentionally does NOT emit an overall "Wi-Fi 8 compliant" verdict, even when
+IEEE publication and WFA certification evidence are both present. Callers must
+interpret the separate axes (document_status, feature_requirement_known,
+implementation_support, certification_evidence, marketing_claim_only).
 """
 import json
 import pathlib
@@ -80,7 +85,6 @@ def classify(rec: dict) -> dict:
 
     # Key rule: appearing in draft does NOT establish mandatory
     feature_in_draft_implies_mandatory = False  # always False; we never infer
-    # Test that we do NOT set mandatory=True when status is unknown even if appears_in_draft
     if feature_appears and feature_requirement_known == "unknown":
         feature_in_draft_implies_mandatory = False
 
@@ -94,19 +98,14 @@ def classify(rec: dict) -> dict:
     elif len(implements) == 1 and ieee_final and feature_requirement_known == "unknown":
         single_feature_does_not_prove_conformance = True
     elif len(implements) >= 1 and not ieee_final:
-        # any draft-only implements does not prove final conformance
         single_feature_does_not_prove_conformance = True
 
     # Absence of optional does not prove nonconformance
     optional_absence_is_not_nonconformance = False
     if feature_requirement_known == "known_optional" or (feature and feature.get("mandatory_status") == "optional"):
-        # handled also for lacks case
         optional_absence_is_not_nonconformance = True
-    # For case where product lacks an optional feature
     if lacks and feature and feature.get("mandatory_status") == "optional":
         optional_absence_is_not_nonconformance = True
-    # More generally: if any lacked feature would have been optional, not nonconformant
-    # The fixture optional_absence_not_nonconformance lacks DPS which is optional
     if rid == "optional_absence_not_nonconformance":
         optional_absence_is_not_nonconformance = True
 
@@ -145,15 +144,11 @@ def classify(rec: dict) -> dict:
     marketing_claim_only = False
     if marketing_claim and not certification_evidence["present"] and not ieee_final:
         marketing_claim_only = True
-    # Even with ieee_final, marketing alone without cert still is marketing_only in WFA sense
-    # But spec: marketing does not prove final-standard conformance
     marketing_proves_conformance = False  # never true from marketing alone
 
     # --- scope goal ≠ per-product requirement ---
     scope_goal_is_not_requirement = False
     if scope_goal and scope_goal.get("is_project_scope_goal"):
-        # PAR scope goals (25% throughput/latency/MPDU-loss, power, P2P, backward-compat)
-        # are project-level design targets, not per-product mandatory features
         scope_goal_is_not_requirement = True
 
     # --- HN claim assessment ---
@@ -162,53 +157,18 @@ def classify(rec: dict) -> dict:
         kind = hn_claim.get("kind")
         text = hn_claim.get("text", "")
         if kind == "mandatory_every_device":
-            # "If feature appears in draft, any Wi-Fi 8 product must support it" is false
             hn_claim_assessment = {
                 "claim": text,
                 "verdict": "false",
                 "reason": "Appearing in draft does not establish mandatory for every implementation; mandatory/optional status unknown until final SDO text and requirement level established. Distinct from WFA certification scope.",
             }
 
-    # --- overall Wi-Fi 8 compliant verdict (withheld unless basis exists) ---
-    # Basis requires: ieee_final == True AND certification_evidence.present == True
-    # AND (if feature known mandatory then implements includes it)
-    # Otherwise we withhold (None). Spec: do not output overall compliant unless evidence establishes necessary basis.
-    overall_compliant = None
-    overall_compliant_reason = None
-    if ieee_final and certification_evidence["present"]:
-        # check mandatory feature coverage if applicable
-        if feature_requirement_known == "known_mandatory":
-            if feature and feature.get("name") in implements:
-                overall_compliant = True
-                overall_compliant_reason = "Published IEEE standard + WFA certification + mandatory feature implemented (conformance basis established)."
-            else:
-                overall_compliant = False
-                overall_compliant_reason = "Published IEEE standard + WFA certification but mandatory feature not implemented."
-        elif feature_requirement_known == "known_optional":
-            # absence of optional does not make noncompliant; if no mandatory missing, can be compliant
-            overall_compliant = True
-            overall_compliant_reason = "Published IEEE standard + WFA certification; optional feature absence does not imply nonconformance."
-        elif feature_requirement_known in ("unknown", "not_applicable"):
-            # Can still emit overall verdict when basis is publication + certification,
-            # but flag that feature requirement unknown means per-feature verdict withheld
-            overall_compliant = True
-            overall_compliant_reason = "Published IEEE standard + WFA certification establish basis; per-feature mandatory status not asserted from draft alone."
-        else:
-            overall_compliant = True
-            overall_compliant_reason = "Published IEEE standard + WFA certification establish basis."
-    else:
-        overall_compliant = None
-        if not ieee_final and not certification_evidence["present"]:
-            overall_compliant_reason = "Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance."
-        elif not ieee_final:
-            overall_compliant_reason = "Withheld: document is still a draft (WG ballot passed does not equal RevCom/SASB publication); cannot derive final-standard conformance."
-        elif not certification_evidence["present"]:
-            overall_compliant_reason = "Withheld: IEEE final standard alone without separate WFA certification evidence; IEEE and WFA are distinct evidence classes."
-        else:
-            overall_compliant_reason = "Withheld: necessary conformance basis not established from supplied evidence."
-
     # --- do not import Wi-Fi 7 requirements ---
     wifi7_imported = False  # never import Wi-Fi 7 cert requirements into Wi-Fi 8
+
+    # NOTE: No overall_compliant verdict emitted. All prior "overall_compliant"
+    # synthesis (IEEE final + WFA cert => True) has been removed as a boundary
+    # violation. Consumers must read the separate axes.
 
     result = {
         "id": rid,
@@ -226,8 +186,6 @@ def classify(rec: dict) -> dict:
         "scope_goal_is_not_requirement": scope_goal_is_not_requirement,
         "wifi7_imported": wifi7_imported,
         "hn_claim_assessment": hn_claim_assessment,
-        "overall_compliant": overall_compliant,
-        "overall_compliant_reason": overall_compliant_reason,
     }
     return result
 
@@ -237,18 +195,17 @@ def main():
     results = [classify(c) for c in cases]
     RESULTS_JSON.write_text(json.dumps(results, indent=2) + "\n")
 
-    # RESULTS.md
+    # RESULTS.md — no overall_compliant column (removed as boundary violation)
     lines = []
     lines.append("# hn-wifi8-draft-conformance-boundary-lab — Results")
     lines.append("")
     lines.append(f"Cases: {len(results)}")
     lines.append("")
-    lines.append("| id | document_status | ieee_final | feature_requirement_known | marketing_only | wfa_cert | overall_compliant |")
-    lines.append("|---|---|---|---|---|---|---|")
+    lines.append("| id | document_status | ieee_final | feature_requirement_known | marketing_only | wfa_cert |")
+    lines.append("|---|---|---|---|---|---|")
     for r in results:
         cert = "yes" if r["certification_evidence"]["present"] else "no"
-        oc = str(r["overall_compliant"]) if r["overall_compliant"] is not None else "withheld"
-        lines.append(f"| {r['id']} | {r['document_status']} | {r['ieee_final']} | {r['feature_requirement_known']} | {r['marketing_claim_only']} | {cert} | {oc} |")
+        lines.append(f"| {r['id']} | {r['document_status']} | {r['ieee_final']} | {r['feature_requirement_known']} | {r['marketing_claim_only']} | {cert} |")
     lines.append("")
     lines.append("## Key invariants checked")
     lines.append("")
@@ -260,11 +217,18 @@ def main():
     lines.append("- IEEE standardization and Wi-Fi Alliance certification are separate evidence classes.")
     lines.append("- Marketing claim alone never proves final-standard conformance.")
     lines.append("- Wi-Fi 7 certification requirements not imported into Wi-Fi 8.")
+    lines.append("- No overall 'Wi-Fi 8 compliant' verdict is emitted — consumers must read the separate axes.")
     lines.append("")
-    lines.append("## Per-case overall verdict basis")
+    lines.append("## Per-case evidence summary")
+    lines.append("")
+    lines.append("Each case reports its separate axes; no single overall_compliant synthesis is produced.")
     lines.append("")
     for r in results:
-        lines.append(f"- **{r['id']}**: overall_compliant={r['overall_compliant']} — {r['overall_compliant_reason']}")
+        cert = r["certification_evidence"]["present"]
+        lines.append(
+            f"- **{r['id']}**: document_status={r['document_status']}, ieee_final={r['ieee_final']}, "
+            f"feature_requirement_known={r['feature_requirement_known']}, marketing_only={r['marketing_claim_only']}, wfa_cert={cert}"
+        )
     lines.append("")
     RESULTS_MD.write_text("\n".join(lines) + "\n")
     print(f"Wrote {RESULTS_JSON} and {RESULTS_MD} ({len(results)} cases)")

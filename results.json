@@ -27,9 +27,7 @@
     "marketing_proves_conformance": false,
     "scope_goal_is_not_requirement": false,
     "wifi7_imported": false,
-    "hn_claim_assessment": null,
-    "overall_compliant": null,
-    "overall_compliant_reason": "Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance."
+    "hn_claim_assessment": null
   },
   {
     "id": "published_final_standard",
@@ -61,9 +59,7 @@
     "marketing_proves_conformance": false,
     "scope_goal_is_not_requirement": false,
     "wifi7_imported": false,
-    "hn_claim_assessment": null,
-    "overall_compliant": null,
-    "overall_compliant_reason": "Withheld: IEEE final standard alone without separate WFA certification evidence; IEEE and WFA are distinct evidence classes."
+    "hn_claim_assessment": null
   },
   {
     "id": "vendor_marketing_no_cert",
@@ -93,9 +89,7 @@
     "marketing_proves_conformance": false,
     "scope_goal_is_not_requirement": false,
     "wifi7_imported": false,
-    "hn_claim_assessment": null,
-    "overall_compliant": null,
-    "overall_compliant_reason": "Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance."
+    "hn_claim_assessment": null
   },
   {
     "id": "implements_one_draft_capability",
@@ -127,9 +121,7 @@
     "marketing_proves_conformance": false,
     "scope_goal_is_not_requirement": false,
     "wifi7_imported": false,
-    "hn_claim_assessment": null,
-    "overall_compliant": null,
-    "overall_compliant_reason": "Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance."
+    "hn_claim_assessment": null
   },
   {
     "id": "feature_in_draft_mandatory_unknown",
@@ -159,9 +151,7 @@
     "marketing_proves_conformance": false,
     "scope_goal_is_not_requirement": false,
     "wifi7_imported": false,
-    "hn_claim_assessment": null,
-    "overall_compliant": null,
-    "overall_compliant_reason": "Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance."
+    "hn_claim_assessment": null
   },
   {
     "id": "scope_goal_mistaken_for_requirement",
@@ -191,9 +181,7 @@
     "marketing_proves_conformance": false,
     "scope_goal_is_not_requirement": true,
     "wifi7_imported": false,
-    "hn_claim_assessment": null,
-    "overall_compliant": null,
-    "overall_compliant_reason": "Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance."
+    "hn_claim_assessment": null
   },
   {
     "id": "wfa_cert_separate_from_ieee",
@@ -223,9 +211,7 @@
     "marketing_proves_conformance": false,
     "scope_goal_is_not_requirement": false,
     "wifi7_imported": false,
-    "hn_claim_assessment": null,
-    "overall_compliant": null,
-    "overall_compliant_reason": "Withheld: document is still a draft (WG ballot passed does not equal RevCom/SASB publication); cannot derive final-standard conformance."
+    "hn_claim_assessment": null
   },
   {
     "id": "hn_feature_means_mandatory",
@@ -259,9 +245,7 @@
       "claim": "If a feature appears in the draft, any Wi-Fi 8 product must support it.",
       "verdict": "false",
       "reason": "Appearing in draft does not establish mandatory for every implementation; mandatory/optional status unknown until final SDO text and requirement level established. Distinct from WFA certification scope."
-    },
-    "overall_compliant": null,
-    "overall_compliant_reason": "Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance."
+    }
   },
   {
     "id": "optional_absence_not_nonconformance",
@@ -296,9 +280,7 @@
     "marketing_proves_conformance": false,
     "scope_goal_is_not_requirement": false,
     "wifi7_imported": false,
-    "hn_claim_assessment": null,
-    "overall_compliant": true,
-    "overall_compliant_reason": "Published IEEE standard + WFA certification; optional feature absence does not imply nonconformance."
+    "hn_claim_assessment": null
   },
   {
     "id": "pre_standard_ships_before_final",
@@ -330,8 +312,6 @@
     "marketing_proves_conformance": false,
     "scope_goal_is_not_requirement": false,
     "wifi7_imported": false,
-    "hn_claim_assessment": null,
-    "overall_compliant": null,
-    "overall_compliant_reason": "Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance."
+    "hn_claim_assessment": null
   }
 ]

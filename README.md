@@ -32,7 +32,7 @@ Rule: **draft ≠ final ≠ mandatory ≠ certified ≠ marketed.**
 
 - **Final publication forecast:** **May 2028** (RevCom & SASB approval; 802 LMSC Mar 2028). Sources: [802.11_Timelines.htm](https://www.ieee802.org/11/Reports/802.11_Timelines.htm) (P802.11bn D2.0 actual 76.5% 2026-09-02; predicted SA Ballot May 2027, Final WG Mar 2028, RevCom May 2028) and tgbn_update.htm predicted milestone row (Final WG Mar 2028, 802 EC Mar 2028, RevCom/SASB May 2028).
 
-- **IEEE vs Wi-Fi Alliance:** “The 802.11 protocols are IEEE standards… Wi-Fi is a brand name owned by the Wi-Fi Alliance that certifies *with pre-defined tests the interoperability* between all devices with this mark. Wi-Fi devices are *based on* IEEE 802.11. *Not every device that uses IEEE 802.11 is Wi-Fi certified.*” — separate standards vs certification; many 802.11 features have optional certification paths. ([NetworkEngineering 53559](https://networkengineering.stackexchange.com/questions/53559/do-wi-fi-and-ieee-802-11-mean-the-same-thing), [Wi-Fi Alliance Wikipedia](https://en.wikipedia.org/wiki/Wi-Fi_Alliance) certification types)
+- **IEEE vs Wi-Fi Alliance (primary — wi-fi.org):** Wi-Fi Alliance describes `Wi-Fi CERTIFIED` as “testing and certification is an internationally recognized process indicating that Wi-Fi products meet the highest standards for interoperability, security, and a range of application specific protocols” — available for consumer, enterprise, and operator-specific devices; interoperability tested “regardless of vendor” and a company “must be a Wi-Fi Alliance member to participate” ([wi-fi.org/why-wi-fi-certified](https://www.wi-fi.org/why-wi-fi-certified)). Programs/technologies are listed by category (Access / Alternative topologies / Applications / Network management / Performance / Security / Wi-Fi (MAC/PHY)) including generational `Wi-Fi CERTIFIED 6/7` ([wi-fi.org/explore-all-technologies](https://www.wi-fi.org/explore-all-technologies)). Three certification paths — FlexTrack, QuickTrack (Qualified Solutions), Derivative — are offered via Authorized Test Laboratories and Wi-Fi Alliance tooling ([wi-fi.org/how-certify](https://www.wi-fi.org/how-certify)). IEEE standardization and Wi-Fi Alliance certification are therefore treated as **separate evidence classes**; one does not prove the other. No published Wi-Fi Alliance “Wi-Fi 8 (802.11bn)” certification program was independently verified on wi-fi.org at the time of writing; product-level `WFA-WB8-*` identifiers in fixtures are **synthetic**.
 
 ## HN 49406539 audit (comments actually retrieved — via HN Firebase + Algolia)
 
@@ -60,15 +60,15 @@ Ten synthetic cases — each carries the facts the classifier must interpret:
 | id | Tests |
 |---|---|
 | `d2_ballot_passed_not_final` | D2.0 WG ballot 76.5% closed 2026-09-02 — still draft; `ieee_final=false`, `ballot_passed_but_not_final=true`, `feature … unknown` |
-| `published_final_standard` | Published `IEEE Std 802.11bn-2028` with RevCom/SASB + date — `ieee_final=true` but still withholds `overall_compliant` without WFA basis |
-| `vendor_marketing_no_cert` | “Wi-Fi 8” marketing with no cert and draft IEEE — `marketing_claim_only=true`, withheld |
+| `published_final_standard` | Published `IEEE Std 802.11bn-2028` with RevCom/SASB + date — `ieee_final=true` (no overall compliant verdict emitted) |
+| `vendor_marketing_no_cert` | “Wi-Fi 8” marketing with no cert and draft IEEE — `marketing_claim_only=true` |
 | `implements_one_draft_capability` | One draft capability (NPCA) claimed as “Wi-Fi 8” — single-feature does not prove conformance |
 | `feature_in_draft_mandatory_unknown` | Co-TDMA appears in D2.0 but `mandatory/optional` unknown — must not infer mandatory |
 | `scope_goal_mistaken_for_requirement` | PAR 25% latency/throughput/MPDU-loss goal treated as per-product requirement — `scope_goal_is_not_requirement=true` |
-| `wfa_cert_separate_from_ieee` | WFA cert issued while IEEE doc still draft — WFA present but `overall_compliant` still withheld (IEEE not final); layers separable |
+| `wfa_cert_separate_from_ieee` | WFA cert issued while IEEE doc still draft — WFA `present=true` but `ieee_final=false`; layers separable (no overall verdict) |
 | `hn_feature_means_mandatory` | HN claim “if feature appears in draft, every Wi-Fi 8 product must support it” — `verdict: false` |
-| `optional_absence_not_nonconformance` | Final IEEE + WFA cert; product lacks optional DPS — `overall_compliant=true`, absence not nonconformance |
-| `pre_standard_ships_before_final` | D3.0-recirc draft device ships 2027-09 before May 2028 final — `ieee_final=false`, withheld |
+| `optional_absence_not_nonconformance` | Final IEEE + WFA cert; product lacks optional DPS — `optional_absence_is_not_nonconformance=true` (no overall verdict) |
+| `pre_standard_ships_before_final` | D3.0-recirc draft device ships 2027-09 before May 2028 final — `ieee_final=false` (no overall verdict) |
 
 ### Evaluator (`evaluator.py`)
 
@@ -83,7 +83,7 @@ certification_evidence       {present, body, program, cert_id, separable_from_ie
 marketing_claim_only         bool
 ```
 
-…plus `overall_compliant` ( `true`/`false`/withheld `null` ) — only emitted when the supplied evidence establishes the necessary basis (published IEEE **and** WFA cert; mapping mandatory coverage if applicable). Exit 0; writes `results.json` + `RESULTS.md`.
+No `overall_compliant` field is emitted. Exit 0; writes `results.json` + `RESULTS.md`.
 
 ### Tests (`tests/test_conformance_boundary.py`)
 
@@ -127,7 +127,7 @@ python3 -m unittest tests/test_conformance_boundary.py -v
 - `https://www.ieee802.org/11/Reports/tgbn_update.htm` — TGbn status (PAR 2023-09-21, D2.00 current, 76.5% LB296, July 2026 resolution)
 - `https://www.ieee802.org/11/Reports/802.11_Timelines.htm` — P802.11bn row (PAR 2023-09-21 [2027-12-31], D1.0 2025-10-06 61%, D2.0 2026-09-02 77% [76.5% actual], predicted SA May 2027, RevCom May 2028)
 - `https://www.ieee802.org/11/PARs/P802.11bn_PAR.pdf` — PAR scope/expiration (2027-12-31, UHR PHY+MAC, 25% targets, power/P2P, backward compat)
-- `https://en.wikipedia.org/wiki/Wi-Fi_Alliance` / `https://networkengineering.stackexchange.com/questions/53559/do-wi-fi-and-ieee-802-11-mean-the-same-thing` — Wi-Fi Alliance certification terminology (brand/certification vs IEEE standard; interoperability tests; not every 802.11 device is Wi-Fi certified; optional program elements) — used only to establish that distinction
+- `https://www.wi-fi.org/why-wi-fi-certified`, `https://www.wi-fi.org/explore-all-technologies`, `https://www.wi-fi.org/how-certify` — Wi-Fi Alliance primary: Wi-Fi CERTIFIED interoperability/security, generational programs (Wi-Fi CERTIFIED 6/7, …), three certification paths (FlexTrack/QuickTrack/Derivative); distinct from IEEE standardization (see note above)
 - No radios, captures, or hardware were used; all evidence is synthetic and deterministic (seed 42 where applicable).
 
 ## Result snapshot (actual, 2026-09-17)
@@ -135,10 +135,8 @@ python3 -m unittest tests/test_conformance_boundary.py -v
 Fixture classifications (evaluator `results.json` / `RESULTS.md`):
 
 ```
-10 cases · 1 overall_compliant=true · 9 overall_compliant=withheld (null)
-  true: optional_absence_not_nonconformance (published IEEE + WFA; optional DPS absent)
-  withheld: all draft or IEEE-without-WFA or WFA-without-IEEE cases (see RESULTS.md)
-  16 tests OK — python3 -m unittest tests/test_conformance_boundary.py -v
+10 cases · 15 tests OK — python3 -m unittest tests/test_conformance_boundary.py -v
+No overall_compliant field emitted (intentionally withheld — see evaluator).
 ```
 
 Status conclusions (unchanged):

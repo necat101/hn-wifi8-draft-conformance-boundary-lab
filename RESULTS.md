@@ -2,18 +2,18 @@
 
 Cases: 10
 
-| id | document_status | ieee_final | feature_requirement_known | marketing_only | wfa_cert | overall_compliant |
-|---|---|---|---|---|---|---|
-| d2_ballot_passed_not_final | draft | False | unknown | False | no | withheld |
-| published_final_standard | published_ieee_standard | True | known_mandatory | False | no | withheld |
-| vendor_marketing_no_cert | draft | False | not_applicable | True | no | withheld |
-| implements_one_draft_capability | draft | False | unknown | True | no | withheld |
-| feature_in_draft_mandatory_unknown | draft | False | unknown | False | no | withheld |
-| scope_goal_mistaken_for_requirement | draft | False | not_applicable | False | no | withheld |
-| wfa_cert_separate_from_ieee | draft | False | not_applicable | False | yes | withheld |
-| hn_feature_means_mandatory | draft | False | unknown | False | no | withheld |
-| optional_absence_not_nonconformance | published_ieee_standard | True | known_optional | False | yes | True |
-| pre_standard_ships_before_final | draft | False | unknown | True | no | withheld |
+| id | document_status | ieee_final | feature_requirement_known | marketing_only | wfa_cert |
+|---|---|---|---|---|---|
+| d2_ballot_passed_not_final | draft | False | unknown | False | no |
+| published_final_standard | published_ieee_standard | True | known_mandatory | False | no |
+| vendor_marketing_no_cert | draft | False | not_applicable | True | no |
+| implements_one_draft_capability | draft | False | unknown | True | no |
+| feature_in_draft_mandatory_unknown | draft | False | unknown | False | no |
+| scope_goal_mistaken_for_requirement | draft | False | not_applicable | False | no |
+| wfa_cert_separate_from_ieee | draft | False | not_applicable | False | yes |
+| hn_feature_means_mandatory | draft | False | unknown | False | no |
+| optional_absence_not_nonconformance | published_ieee_standard | True | known_optional | False | yes |
+| pre_standard_ships_before_final | draft | False | unknown | True | no |
 
 ## Key invariants checked
 
@@ -25,17 +25,20 @@ Cases: 10
 - IEEE standardization and Wi-Fi Alliance certification are separate evidence classes.
 - Marketing claim alone never proves final-standard conformance.
 - Wi-Fi 7 certification requirements not imported into Wi-Fi 8.
+- No overall 'Wi-Fi 8 compliant' verdict is emitted — consumers must read the separate axes.
 
-## Per-case overall verdict basis
+## Per-case evidence summary
 
-- **d2_ballot_passed_not_final**: overall_compliant=None — Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance.
-- **published_final_standard**: overall_compliant=None — Withheld: IEEE final standard alone without separate WFA certification evidence; IEEE and WFA are distinct evidence classes.
-- **vendor_marketing_no_cert**: overall_compliant=None — Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance.
-- **implements_one_draft_capability**: overall_compliant=None — Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance.
-- **feature_in_draft_mandatory_unknown**: overall_compliant=None — Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance.
-- **scope_goal_mistaken_for_requirement**: overall_compliant=None — Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance.
-- **wfa_cert_separate_from_ieee**: overall_compliant=None — Withheld: document is still a draft (WG ballot passed does not equal RevCom/SASB publication); cannot derive final-standard conformance.
-- **hn_feature_means_mandatory**: overall_compliant=None — Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance.
-- **optional_absence_not_nonconformance**: overall_compliant=True — Published IEEE standard + WFA certification; optional feature absence does not imply nonconformance.
-- **pre_standard_ships_before_final**: overall_compliant=None — Withheld: draft/WG ballot is not a published IEEE standard and no WFA certification evidence supplied; marketing alone does not establish conformance.
+Each case reports its separate axes; no single overall_compliant synthesis is produced.
+
+- **d2_ballot_passed_not_final**: document_status=draft, ieee_final=False, feature_requirement_known=unknown, marketing_only=False, wfa_cert=False
+- **published_final_standard**: document_status=published_ieee_standard, ieee_final=True, feature_requirement_known=known_mandatory, marketing_only=False, wfa_cert=False
+- **vendor_marketing_no_cert**: document_status=draft, ieee_final=False, feature_requirement_known=not_applicable, marketing_only=True, wfa_cert=False
+- **implements_one_draft_capability**: document_status=draft, ieee_final=False, feature_requirement_known=unknown, marketing_only=True, wfa_cert=False
+- **feature_in_draft_mandatory_unknown**: document_status=draft, ieee_final=False, feature_requirement_known=unknown, marketing_only=False, wfa_cert=False
+- **scope_goal_mistaken_for_requirement**: document_status=draft, ieee_final=False, feature_requirement_known=not_applicable, marketing_only=False, wfa_cert=False
+- **wfa_cert_separate_from_ieee**: document_status=draft, ieee_final=False, feature_requirement_known=not_applicable, marketing_only=False, wfa_cert=True
+- **hn_feature_means_mandatory**: document_status=draft, ieee_final=False, feature_requirement_known=unknown, marketing_only=False, wfa_cert=False
+- **optional_absence_not_nonconformance**: document_status=published_ieee_standard, ieee_final=True, feature_requirement_known=known_optional, marketing_only=False, wfa_cert=True
+- **pre_standard_ships_before_final**: document_status=draft, ieee_final=False, feature_requirement_known=unknown, marketing_only=True, wfa_cert=False
 
