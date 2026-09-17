@@ -1,0 +1,362 @@
+[
+  {
+    "id": "d2_ballot_passed_not_final",
+    "title": "D2.0 passed WG initial ballot — still a draft",
+    "document": {
+      "draft_version": "D2.0",
+      "draft_label": "P802.11bn D2.0",
+      "ballot_id": "LB296",
+      "ballot_type": "WG initial",
+      "ballot_open": "2026-08-03",
+      "ballot_close": "2026-09-02",
+      "ballot_result_percent": 76.5,
+      "ballot_status": "Closed: 76.5% approval",
+      "is_published_ieee_standard": false,
+      "publication_date": null,
+      "revcom_approval": false,
+      "sasb_approval": false
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": {
+      "name": "Coordinated Spatial Reuse (Co-SR)",
+      "appears_in_draft": true,
+      "mandatory_status": "unknown"
+    },
+    "product": {
+      "marketing_claim": null,
+      "wfa_certification": null,
+      "implements": []
+    },
+    "scope_goal": null,
+    "hn_claim": null
+  },
+  {
+    "id": "published_final_standard",
+    "title": "Published IEEE Std 802.11bn-2028 (final)",
+    "document": {
+      "draft_version": null,
+      "draft_label": "IEEE Std 802.11bn-2028",
+      "ballot_id": null,
+      "ballot_type": null,
+      "ballot_open": null,
+      "ballot_close": null,
+      "ballot_result_percent": null,
+      "ballot_status": null,
+      "is_published_ieee_standard": true,
+      "publication_date": "2028-05-15",
+      "revcom_approval": true,
+      "sasb_approval": true
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": {
+      "name": "Coordinated Beamforming (Co-BF)",
+      "appears_in_draft": true,
+      "mandatory_status": "mandatory"
+    },
+    "product": {
+      "marketing_claim": null,
+      "wfa_certification": null,
+      "implements": ["Co-BF"]
+    },
+    "scope_goal": null,
+    "hn_claim": null
+  },
+  {
+    "id": "vendor_marketing_no_cert",
+    "title": "Vendor says Wi-Fi 8 with no IEEE or WFA evidence",
+    "document": {
+      "draft_version": "D2.0",
+      "draft_label": "P802.11bn D2.0",
+      "ballot_id": "LB296",
+      "ballot_type": "WG initial",
+      "ballot_open": "2026-08-03",
+      "ballot_close": "2026-09-02",
+      "ballot_result_percent": 76.5,
+      "ballot_status": "Closed: 76.5% approval",
+      "is_published_ieee_standard": false,
+      "publication_date": null,
+      "revcom_approval": false,
+      "sasb_approval": false
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": null,
+    "product": {
+      "marketing_claim": "Wi-Fi 8 Ready — Next-Gen Ultra High Reliability",
+      "wfa_certification": null,
+      "implements": []
+    },
+    "scope_goal": null,
+    "hn_claim": null
+  },
+  {
+    "id": "implements_one_draft_capability",
+    "title": "Product implements one draft feature — not full conformance",
+    "document": {
+      "draft_version": "D2.0",
+      "draft_label": "P802.11bn D2.0",
+      "ballot_id": "LB296",
+      "ballot_type": "WG initial",
+      "ballot_open": "2026-08-03",
+      "ballot_close": "2026-09-02",
+      "ballot_result_percent": 76.5,
+      "ballot_status": "Closed: 76.5% approval",
+      "is_published_ieee_standard": false,
+      "publication_date": null,
+      "revcom_approval": false,
+      "sasb_approval": false
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": {
+      "name": "Distributed Tone Plan / NPCA (Non-Primary Channel Access)",
+      "appears_in_draft": true,
+      "mandatory_status": "unknown"
+    },
+    "product": {
+      "marketing_claim": "Supports Wi-Fi 8 NPCA",
+      "wfa_certification": null,
+      "implements": ["NPCA"]
+    },
+    "scope_goal": null,
+    "hn_claim": null
+  },
+  {
+    "id": "feature_in_draft_mandatory_unknown",
+    "title": "Feature appears in draft but mandatory/optional status unknown",
+    "document": {
+      "draft_version": "D2.0",
+      "draft_label": "P802.11bn D2.0",
+      "ballot_id": "LB296",
+      "ballot_type": "WG initial",
+      "ballot_open": "2026-08-03",
+      "ballot_close": "2026-09-02",
+      "ballot_result_percent": 76.5,
+      "ballot_status": "Closed: 76.5% approval",
+      "is_published_ieee_standard": false,
+      "publication_date": null,
+      "revcom_approval": false,
+      "sasb_approval": false
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": {
+      "name": "Multi-AP Coordination — Coordinated TDMA (Co-TDMA)",
+      "appears_in_draft": true,
+      "mandatory_status": "unknown"
+    },
+    "product": {
+      "marketing_claim": null,
+      "wfa_certification": null,
+      "implements": []
+    },
+    "scope_goal": null,
+    "hn_claim": null
+  },
+  {
+    "id": "scope_goal_mistaken_for_requirement",
+    "title": "PAR scope performance goal mistaken for per-product requirement",
+    "document": {
+      "draft_version": "D2.0",
+      "draft_label": "P802.11bn D2.0",
+      "ballot_id": "LB296",
+      "ballot_type": "WG initial",
+      "ballot_open": "2026-08-03",
+      "ballot_close": "2026-09-02",
+      "ballot_result_percent": 76.5,
+      "ballot_status": "Closed: 76.5% approval",
+      "is_published_ieee_standard": false,
+      "publication_date": null,
+      "revcom_approval": false,
+      "sasb_approval": false
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": null,
+    "product": {
+      "marketing_claim": null,
+      "wfa_certification": null,
+      "implements": []
+    },
+    "scope_goal": {
+      "text": "At least one mode of operation capable of reducing latency by 25% for the 95th percentile vs EHT and increasing throughput by 25% (Rate-vs-Range)",
+      "source": "P802.11bn PAR scope / tgbn_update.htm",
+      "is_project_scope_goal": true,
+      "is_per_product_mandatory": false
+    },
+    "hn_claim": null
+  },
+  {
+    "id": "wfa_cert_separate_from_ieee",
+    "title": "Wi-Fi Alliance certification kept separate from IEEE publication status",
+    "document": {
+      "draft_version": "D2.0",
+      "draft_label": "P802.11bn D2.0",
+      "ballot_id": "LB296",
+      "ballot_type": "WG initial",
+      "ballot_open": "2026-08-03",
+      "ballot_close": "2026-09-02",
+      "ballot_result_percent": 76.5,
+      "ballot_status": "Closed: 76.5% approval",
+      "is_published_ieee_standard": false,
+      "publication_date": null,
+      "revcom_approval": false,
+      "sasb_approval": false
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": null,
+    "product": {
+      "marketing_claim": "Wi-Fi 8 Certified",
+      "wfa_certification": {
+        "program": "Wi-Fi 8 (802.11bn) Certification",
+        "cert_id": "WFA-WB8-2028-001",
+        "cert_body": "Wi-Fi Alliance",
+        "cert_date": "2028-01-15",
+        "cert_status": "issued"
+      },
+      "implements": []
+    },
+    "scope_goal": null,
+    "hn_claim": null
+  },
+  {
+    "id": "hn_feature_means_mandatory",
+    "title": "HN claim: feature in the standard means every device must implement it",
+    "document": {
+      "draft_version": "D2.0",
+      "draft_label": "P802.11bn D2.0",
+      "ballot_id": "LB296",
+      "ballot_type": "WG initial",
+      "ballot_open": "2026-08-03",
+      "ballot_close": "2026-09-02",
+      "ballot_result_percent": 76.5,
+      "ballot_status": "Closed: 76.5% approval",
+      "is_published_ieee_standard": false,
+      "publication_date": null,
+      "revcom_approval": false,
+      "sasb_approval": false
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": {
+      "name": "Co-SR",
+      "appears_in_draft": true,
+      "mandatory_status": "unknown"
+    },
+    "product": {
+      "marketing_claim": null,
+      "wfa_certification": null,
+      "implements": []
+    },
+    "scope_goal": null,
+    "hn_claim": {
+      "text": "If a feature appears in the draft, any Wi-Fi 8 product must support it.",
+      "kind": "mandatory_every_device"
+    }
+  },
+  {
+    "id": "optional_absence_not_nonconformance",
+    "title": "Absence of optional capability does not prove nonconformance",
+    "document": {
+      "draft_version": null,
+      "draft_label": "IEEE Std 802.11bn-2028",
+      "ballot_id": null,
+      "ballot_type": null,
+      "ballot_open": null,
+      "ballot_close": null,
+      "ballot_result_percent": null,
+      "ballot_status": null,
+      "is_published_ieee_standard": true,
+      "publication_date": "2028-05-15",
+      "revcom_approval": true,
+      "sasb_approval": true
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": {
+      "name": "Dynamic Power Save (DPS)",
+      "appears_in_draft": true,
+      "mandatory_status": "optional"
+    },
+    "product": {
+      "marketing_claim": null,
+      "wfa_certification": {
+        "program": "Wi-Fi 8 (802.11bn) Certification",
+        "cert_id": "WFA-WB8-2028-042",
+        "cert_body": "Wi-Fi Alliance",
+        "cert_date": "2028-03-01",
+        "cert_status": "issued"
+      },
+      "implements": ["Co-BF", "Co-SR"],
+      "lacks": ["DPS"]
+    },
+    "scope_goal": null,
+    "hn_claim": null
+  },
+  {
+    "id": "pre_standard_ships_before_final",
+    "title": "Device ships before final standard — draft-based pre-standard product",
+    "document": {
+      "draft_version": "D3.0",
+      "draft_label": "P802.11bn D3.0",
+      "ballot_id": "LB3xx",
+      "ballot_type": "WG recirculation",
+      "ballot_open": "2027-01-15",
+      "ballot_close": "2027-02-15",
+      "ballot_result_percent": 88.0,
+      "ballot_status": "Closed: 88% approval (recirc)",
+      "is_published_ieee_standard": false,
+      "publication_date": null,
+      "revcom_approval": false,
+      "sasb_approval": false
+    },
+    "par": {
+      "par_approved": "2023-09-21",
+      "par_expires": "2027-12-31",
+      "par_status": "Active"
+    },
+    "feature": {
+      "name": "Coordinated Beamforming",
+      "appears_in_draft": true,
+      "mandatory_status": "unknown"
+    },
+    "product": {
+      "marketing_claim": "Wi-Fi 8 Pre-Standard — Based on 802.11bn Draft 3.0",
+      "wfa_certification": null,
+      "implements": ["Co-BF"],
+      "ship_date": "2027-09-01"
+    },
+    "scope_goal": null,
+    "hn_claim": null
+  }
+]
